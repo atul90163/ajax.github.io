@@ -1,0 +1,79 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>live search example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+<div class="container mt-2">
+  
+  <div class="row">
+  <div class="col-lg-8 col-md-8  col-sm-12 ">
+  <form class="form-inline" action="data.php" method="post">
+   
+    <input type="text" class="form-control" id="email" placeholder="Enter email" name="email">
+    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+  </form>
+  </div>
+  <div class="col-lg-4 col-md-4 col-sm-12" style="position:relative; top:-2px;  margin-left:5px; " id="ulist">
+  <ul class="list-group" id="ullist">
+ </ul>
+</div></div>
+</div>
+
+</body>
+<script>
+$(document).ready(function(){
+	
+	$( "#email" ).keyup(function() {
+	var n =$(this).val();
+  $.ajax({
+	  
+	  url:"live.php",
+	  type:'POST',
+	  data:{'name':n},
+	  success:function(result){
+		  
+		  $("#ullist").html(result);
+	  }
+	  
+	  
+  });
+	
+});
+/*
+  $("#liid").click(function(){
+
+var li = $(this).text();
+console.log(li);
+$("#ullist").html('');
+});	
+*/
+
+$(document).on('click','#liid' , function(){
+$("#email").val($(this).text());
+$("#ullist").html('');
+//var i=$(this).text();
+//alert(i);
+
+});
+});
+	
+
+</script>
+</html>
